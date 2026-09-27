@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import { Navigate, Link } from 'react-router-dom';
-import { Loader, ArrowLeft, Eye, EyeOff } from 'lucide-react';
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { Navigate, Link } from "react-router-dom";
+import { Loader, ArrowLeft, Eye, EyeOff } from "lucide-react";
 
 export default function Login() {
   const { login, user } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   if (user) return <Navigate to="/dashboard" replace />;
@@ -16,9 +16,14 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
     const { error } = await login(email, password);
-    if (error) setError(error.message === 'Invalid login credentials' ? 'Email atau password salah' : error.message);
+    if (error)
+      setError(
+        error.message === "Invalid login credentials"
+          ? "Email atau password salah"
+          : error.message,
+      );
     setLoading(false);
   };
 
@@ -30,7 +35,10 @@ export default function Login() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_110%)]" />
 
       <div className="relative w-full max-w-md">
-        <Link to="/" className="text-slate-400 hover:text-cyan-400 text-xs flex items-center gap-1 mb-4 transition">
+        <Link
+          to="/"
+          className="text-slate-400 hover:text-cyan-400 text-xs flex items-center gap-1 mb-4 transition"
+        >
           <ArrowLeft size={14} /> Kembali ke Home
         </Link>
 
@@ -45,11 +53,13 @@ export default function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">Email</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                Email
+              </label>
               <input
                 type="email"
                 value={email}
-                onChange={e => setEmail(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="owner@laundryku.com"
                 required
                 className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-cyan-500/50 text-white placeholder-slate-500 transition text-sm"
@@ -57,12 +67,14 @@ export default function Login() {
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1.5">Password</label>
+              <label className="block text-xs font-medium text-slate-300 mb-1.5">
+                Password
+              </label>
               <div className="relative">
                 <input
-                  type={showPass ? 'text' : 'password'}
+                  type={showPass ? "text" : "password"}
                   value={password}
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
                   className="w-full px-4 py-3 pr-12 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-cyan-500/50 text-white placeholder-slate-500 transition text-sm"
@@ -94,14 +106,33 @@ export default function Login() {
                   Memproses...
                 </>
               ) : (
-                'Masuk'
+                "Masuk"
               )}
             </button>
           </form>
 
-          <p className="text-[10px] text-slate-500 text-center mt-6">
-            Demo: <span className="text-cyan-400">owner@laundryku.com</span> / <span className="text-cyan-400">password123</span>
-          </p>
+          <div className="mt-6 pt-6 border-t border-white/10">
+            <p className="text-[10px] text-slate-500 text-center mb-2 uppercase tracking-wider">
+              Demo Akun
+            </p>
+            <div className="space-y-1.5">
+              <div className="flex justify-between items-center text-[11px] bg-white/5 rounded-lg px-3 py-2">
+                <span className="text-slate-400">👑 Owner</span>
+                <span className="text-cyan-400 font-mono">
+                  owner@laundryku.com
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-[11px] bg-white/5 rounded-lg px-3 py-2">
+                <span className="text-slate-400">👤 Staff</span>
+                <span className="text-cyan-400 font-mono">
+                  staff@laundryku.com
+                </span>
+              </div>
+              <p className="text-[10px] text-slate-600 text-center mt-2">
+                Password: <span className="text-cyan-400">password123</span>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

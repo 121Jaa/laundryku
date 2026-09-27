@@ -60,7 +60,7 @@ export default function App() {
           <Route
             path="/new"
             element={
-              <ProtectedRoute roles={["owner", "kasir"]}>
+              <ProtectedRoute roles={["owner", "staff"]}>
                 <StaffLayout>
                   <NewOrder />
                 </StaffLayout>
@@ -71,7 +71,7 @@ export default function App() {
           <Route
             path="/orders"
             element={
-              <ProtectedRoute>
+              <ProtectedRoute roles={["owner", "staff"]}>
                 <StaffLayout>
                   <Orders />
                 </StaffLayout>
@@ -82,7 +82,7 @@ export default function App() {
           <Route
             path="/customers"
             element={
-              <ProtectedRoute roles={["owner", "kasir"]}>
+              <ProtectedRoute roles={["owner", "staff"]}>
                 <StaffLayout>
                   <Customers />
                 </StaffLayout>
@@ -93,7 +93,7 @@ export default function App() {
           <Route
             path="/delivery"
             element={
-              <ProtectedRoute roles={["owner", "kurir"]}>
+              <ProtectedRoute roles={["owner", "staff"]}>
                 <StaffLayout>
                   <Delivery />
                 </StaffLayout>
@@ -101,6 +101,7 @@ export default function App() {
             }
           />
 
+          {/* ============ OWNER ONLY ============ */}
           <Route
             path="/reports"
             element={
