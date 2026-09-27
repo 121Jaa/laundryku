@@ -71,7 +71,7 @@ export default function App() {
           <Route
             path="/orders"
             element={
-              <ProtectedRoute roles={["owner", "staff"]}>
+              <ProtectedRoute>
                 <StaffLayout>
                   <Orders />
                 </StaffLayout>
@@ -101,22 +101,10 @@ export default function App() {
             }
           />
 
-          {/* ============ OWNER ONLY ============ */}
-          <Route
-            path="/reports"
-            element={
-              <ProtectedRoute roles={["owner"]}>
-                <StaffLayout>
-                  <Reports />
-                </StaffLayout>
-              </ProtectedRoute>
-            }
-          />
-
           <Route
             path="/testimonials"
             element={
-              <ProtectedRoute roles={["owner"]}>
+              <ProtectedRoute roles={["owner", "staff"]}>
                 <StaffLayout>
                   <Testimonials />
                 </StaffLayout>
@@ -127,9 +115,21 @@ export default function App() {
           <Route
             path="/qr"
             element={
-              <ProtectedRoute roles={["owner"]}>
+              <ProtectedRoute roles={["owner", "staff"]}>
                 <StaffLayout>
                   <QRCodePage />
+                </StaffLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* ============ OWNER ONLY ============ */}
+          <Route
+            path="/reports"
+            element={
+              <ProtectedRoute roles={["owner"]}>
+                <StaffLayout>
+                  <Reports />
                 </StaffLayout>
               </ProtectedRoute>
             }
